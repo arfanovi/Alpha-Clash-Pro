@@ -15,13 +15,8 @@ function handleKeyboardKeyUpEvent(event){
         const updateScore = currentScore + 1;
         setTextElementValueById('current-score', updateScore);
 
-        const newScore = currentScore + 1;
-
-
         removeBackgroundColorById(expectedAlphabet);
         continueGame();
-
-
     }
  
     else{
@@ -29,6 +24,11 @@ function handleKeyboardKeyUpEvent(event){
         const currentLife  = getTextElementValueById('current-life');
         const updateLife = currentLife - 1;
         setTextElementValueById('current-life', updateLife);
+
+        if(updateLife === 0){
+            // console.log('game over ');
+            gameOver();
+        }
 
     };
 };
@@ -58,10 +58,35 @@ function continueGame(){
 // Start All 
 function play(){
     hideElementById('home-screen');
+    hideElementById('final-score')
     showElementById('play-ground');
+
+
+
+    // reset score 
+    setTextElementValueById('current-life',5);
+    setTextElementValueById('current-score', 0);
+
+
     continueGame();
 
 }
 
 
 
+function gameOver(){
+hideElementById('play-ground');
+showElementById('final-score');
+
+const lastScore = getTextElementValueById('current-score');
+console.log(lastScore);
+setTextElementValueById('last-score', lastScore);
+
+};
+
+
+
+
+function playAgain(){
+
+}
